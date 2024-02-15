@@ -16,10 +16,12 @@
         <div class="product-container">
           <div class="product-image">
             <!-- image goes here -->
-            <img v-bind:src="image" alt="sock-blue" />
+            <img :src="image" alt="sock-blue" />
           </div>
           <div class="product-info">
             <h1>{{product}}</h1>
+            <p v-if="inventory > 10">In Stock</p>
+            <p v-else>Out Of Stock</p>
           </div>
         </div>
       </div>
