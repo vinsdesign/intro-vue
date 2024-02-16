@@ -3,14 +3,25 @@ const app = Vue.createApp({
     return {
       cart: 0,
       product: "Socks",
-      image: "./assets/images/socks_green.jpg",
-      inStock: false,
+      brand: "Vins Brands",
+      selectedVariant: 0,
       details: ["50% cotton", "30% Wool", "20% Polyester"],
       variants: [
-        { id: 1, color: "green", image: "./assets/images/socks_green.jpg" },
-        { id: 2235, color: "blue", image: "./assets/images/socks_blue.jpg" },
+        {
+          id: 1,
+          color: "green",
+          image: "./assets/images/socks_green.jpg",
+          quantity: 50,
+        },
+        {
+          id: 2,
+          color: "blue",
+          image: "./assets/images/socks_blue.jpg",
+          quantity: 0,
+        },
       ],
       sizes: ["S", "M", "L", "XL"],
+      onSale: true,
     };
   },
   methods: {
@@ -23,8 +34,27 @@ const app = Vue.createApp({
         this.cart -= 1;
       }
     },
-    updateImage(variantImage) {
-      this.image = variantImage;
+    updateVariant(index) {
+      this.selectedVariant = index;
     },
+  },
+  computed: {
+    title() {
+      return this.brand + " " + this.product;
+    },
+    image() {
+      return this.variants[this.selectedVariant].image;
+    },
+    inStock() {
+      return this.variants[this.selectedVariant].quantity;
+    },
+    // solution
+    sale() {
+      if (this.onSale) {
+        return this.brand + " " + this.product + " is on sale.";
+      }
+      return "";
+    },
+    // solution
   },
 });
