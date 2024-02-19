@@ -55,13 +55,13 @@ app.component("product-display", {
       details: ["50% cotton", "30% Wool", "20% Polyester"],
       variants: [
         {
-          id: 1,
+          id: 235,
           color: "green",
           image: "./assets/images/socks_green.jpg",
           quantity: 50,
         },
         {
-          id: 2,
+          id: 236,
           color: "blue",
           image: "./assets/images/socks_blue.jpg",
           quantity: 0,
@@ -73,13 +73,11 @@ app.component("product-display", {
   },
   methods: {
     addToCart() {
-      this.cart += 1;
+      this.$emit("add-to-cart", this.variants[this.selectedVariant].id);
     },
     // solution
     removeFromCart() {
-      if (this.cart >= 1) {
-        this.cart -= 1;
-      }
+      this.$emit("remove-to-cart", this.variants[this.selectedVariant].id);
     },
     updateVariant(index) {
       this.selectedVariant = index;
